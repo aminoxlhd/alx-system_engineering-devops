@@ -1,2 +1,2 @@
 #!/bin/bah
-PATH=$PATH:/action
+export PATH=$PATH:/action
