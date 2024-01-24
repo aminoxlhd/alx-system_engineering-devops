@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Redirection
+
+echo -e "Updating and installing Nginx.\n"
+sudo apt-get update -y -qq && \
+sudo apt-get install nginx -y
+
+echo -e "\nSetting up Nginx and redirection.\n"
+
+echo "server {
+	listen 80;
+
+	ubuntu;
+
+	location /redirect_me {
+	return 301 https://www.youtube.com/watch?v=QH2-TGUlwu4;
+}
+
+}" | sudo tee /etc/nginx/sites-available/redirect_me > /dev/null
+
+sudo ln -s /etc/nginx/sites-available/redirect_me /etc/nginx/sites-enabled/
+
+sudo rm -f /etc/nginx/sites-enabled/default
+
+sudo service nginx restart
+
+echo -e "\nCompleted. \n"
