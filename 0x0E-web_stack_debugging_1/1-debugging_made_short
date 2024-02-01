@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# fix port 80: Connection refused
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+service nginx start
+echo "" > /run/nginx.pid
