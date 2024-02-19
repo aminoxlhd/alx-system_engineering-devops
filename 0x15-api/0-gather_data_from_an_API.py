@@ -1,8 +1,8 @@
 #!/usr/bin/python3
 """ sing this REST API, for a given employee ID """
 
-import sys
 import requests
+import sys
 
 if __name__ == "__main__":
     url = "https://jsonplaceholder.typicode.com/"
