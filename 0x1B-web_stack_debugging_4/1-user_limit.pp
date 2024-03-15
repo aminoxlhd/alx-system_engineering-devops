@@ -1,18 +1,12 @@
 #User limit
 
-augeas { 'limits_nofile_1':
-  context => '/files/etc/security/limits.conf',
-  changes => [
-    'set *[*="nofile"][position()=1]/#attribute/name "nofile"',
-    'set *[*="nofile"][position()=1]/#attribute/value "50000"',
-  ],
-  notify => Exec['limits_nofile_2'],
+exec {'replace-1':
+  provider => shell,
+  command  => 'sudo sed -i "s/nofile 5/nofile 50000/" /etc/security/limits.conf',
+  before   => Exec['replace-2'],
 }
 
-augeas { 'limits_nofile_2':
-  context => '/files/etc/security/limits.conf',
-  changes => [
-    'set *[*="nofile"][position()=2]/#attribute/name "nofile"',
-    'set *[*="nofile"][position()=2]/#attribute/value "40000"',
-  ],
+exec {'replace-2':
+  provider => shell,
+  command  => 'sudo sed -i "s/nofile 4/nofile 40000/" /etc/security/limits.conf',
 }
