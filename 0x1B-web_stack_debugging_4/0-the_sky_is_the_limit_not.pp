@@ -1,12 +1,11 @@
-#fix our stack so that we get to 0
-
-file { '/etc/default/nginx':
-  ensure  => present,
-  content => template('module_name/nginx_config.erb'),
-  notify  => Exec['restart_nginx'],
+#Increase the ULIMIT of the default file
+exec { 'fix--for-nginx':
+  command => '/bin/sed -i "s/15/4096/" /etc/default/nginx',
+  path    => '/usr/local/bin/:/bin/',
 }
 
-exec { 'restart_nginx':
-  command     => 'sudo service nginx restart',
-  refreshonly => true,
+# Restart Nginx
+exec { 'nginx-restart':
+  command => '/etc/init.d/nginx restart',
+  path    => '/etc/init.d/',
 }
