@@ -1,4 +1,4 @@
-# fix our stack so that we get to 0
+#fix our stack so that we get to 0
 
 file { '/etc/default/nginx':
   ensure  => present,
